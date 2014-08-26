@@ -1,0 +1,36 @@
+---
+Name: addon-example
+Cartridge-Short-Name: ADDON_EXAMPLE
+Architecture: noarch
+Display-Name: Addon example
+Description: describe your addon here
+Version: '1.0'
+Versions:
+- '1.0'
+Cartridge-Version: 1.0.1
+Compatible-Versions:
+- 1.0.0
+Cartridge-Vendor: worldline
+License: your license
+Vendor: Worldline
+Categories:
+- plugin
+- embedded
+Website: http://www.your-service-website.com
+Help-Topics:
+  Help page: https://www.your-service-website.com/your-help-page.html
+  Billing: https://www.your-service-website.com/your-billing-page.html
+Cart-Data:
+- Key: username
+  Type: cart_data
+  Description: username on webservice
+- Key: password
+  Type: cart_data
+  Description: Password on webservice
+- Key: connection_url
+  Type: cart_data
+  Description: URL of the webservice
+Provides:
+- addon-example-1.0
+- addon-example
+Install-Build-Required: false

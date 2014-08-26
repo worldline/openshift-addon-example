@@ -1,0 +1,40 @@
+#!/bin/bash -e
+
+source $OPENSHIFT_CARTRIDGE_SDK_BASH
+source "${OPENSHIFT_ADDON_EXAMPLE_DIR}/lib/common.sh"
+
+if [ -z "$OBJECT_CODE" ]; then
+	client_error "You need to add the environment variable 'OBJECT_CODE' to your application for billing."
+	client_error "$ rhc set-env OBJECT_CODE=VALUE -a myapp"
+	exit 1
+fi  
+
+username=$(generate_username)
+password=$(generate_password)
+
+URL = "https://$username:$password@www.my-webservice.com:80/"
+
+request = "curl --silent --write-out \"\n%{http_code}\n\" -L -X POST \"$URL/api/user\" -d \"{ \"username\" : \"$username\", \"password\" : \"$password\", \"object_code\" : \"$OBJECT_CODE\"}\"" 
+
+response=$($request)
+
+status_code=$(echo "$response" | sed -n '$p')
+html=$(echo "$response" | sed '$d')
+
+if [ status_code -ne 201 ]; then
+	client_error "Failed to execute $request"
+	client_error "Status code $status_code != 201"
+	client_error "$html"
+	exit 1
+fi
+
+echo "$username" > $OPENSHIFT_ADDON_EXAMPLE_DIR/env/OPENSHIFT_ADDON_EXAMPLE_USERNAME
+echo "$password" > $OPENSHIFT_ADDON_EXAMPLE_DIR/env/OPENSHIFT_ADDON_EXAMPLE_PASSWORD
+echo "$URL" > $OPENSHIFT_ADDON_EXAMPLE_DIR/env/OPENSHIFT_ADDON_EXAMPLE_URL
+
+client_result "Addon sucessfully installed, use the following credentials"
+client_result "User : $username"
+client_result "Password : $password"
+client_result "URL : $URL"
+
+exit 0
