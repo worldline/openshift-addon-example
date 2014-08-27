@@ -17,6 +17,7 @@ Categories:
 - plugin
 - embedded
 Website: http://www.your-service-website.com
+Source-Url: https://github.com/worldline/openshift-addon-example.git
 Help-Topics:
   Help page: https://www.your-service-website.com/your-help-page.html
   Billing: https://www.your-service-website.com/your-billing-page.html
