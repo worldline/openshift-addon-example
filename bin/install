@@ -12,8 +12,8 @@ fi
 # Provisionnes an account for a web service, change the lines below to adapt to your web service
 username=$(generate_username)
 password=$(generate_password)
-URL="https://$username:$password@am-tforli.apps.zone52.org/api/user?object_code=$OBJECT_CODE"
-request="curl -k --silent --write-out \"\n%{http_code}\n\" -L -X POST $URL"
+URL="https://$username:$password@am-tforli.apps.zone52.org"
+request="curl -k --silent --write-out \"\n%{http_code}\n\" -L -X POST $URL/api/user?object_code=$OBJECT_CODE"
 
 response=$($request)
 status_code=$(echo "$response" | sed -n '$p')
