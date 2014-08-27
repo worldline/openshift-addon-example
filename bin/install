@@ -14,7 +14,7 @@ password=$(generate_password)
 
 URL = "https://$username:$password@www.my-webservice.com:80/"
 
-request = "curl --silent --write-out \"\n%{http_code}\n\" -L -X POST \"$URL/api/user\" -d \"{ \"username\" : \"$username\", \"password\" : \"$password\", \"object_code\" : \"$OBJECT_CODE\"}\"" 
+request = "curl -k --silent --write-out \"\n%{http_code}\n\" -L -X POST \"$URL/api/user\" -d \"{ \"username\" : \"$username\", \"password\" : \"$password\", \"object_code\" : \"$OBJECT_CODE\"}\"" 
 
 response=$($request)
 
