@@ -1,7 +1,7 @@
 ---
+# Update this section to adapt to your web service
 Name: addon-example
 Cartridge-Short-Name: ADDON_EXAMPLE
-Architecture: noarch
 Display-Name: Addon example
 Description: describe your addon here
 Version: '1.0'
@@ -10,12 +10,8 @@ Versions:
 Cartridge-Version: 1.0.1
 Compatible-Versions:
 - 1.0.0
-Cartridge-Vendor: worldline
 License: your license
 Vendor: Worldline
-Categories:
-- plugin
-- embedded
 Website: http://www.your-service-website.com
 Source-Url: https://github.com/worldline/openshift-addon-example.git
 Help-Topics:
@@ -34,4 +30,11 @@ Cart-Data:
 Provides:
 - addon-example-1.0
 - addon-example
+
+# Parameters below must be left intact
 Install-Build-Required: false
+Architecture: noarch
+Cartridge-Vendor: worldline
+Categories:
+- plugin
+- embedded
