@@ -1,0 +1,28 @@
+#!/bin/bash -e
+
+source $OPENSHIFT_CARTRIDGE_SDK_BASH
+
+# Edit the line below to adapt to your web service
+request="curl -k --silent --write-out \"\n%{http_code}\n\" -L -X DELETE $OPENSHIFT_ADDON_EXAMPLE_URL/api/user"
+
+response=$($request)
+
+status_code=$(echo "$response" | sed -n '$p')
+html=$(echo "$response" | sed '$d')
+
+if [ status_code -ne 204 ]; then
+	client_error "Failed to execute $request"
+	client_error "Status code $status_code != 204"
+	client_error "$html"
+	exit 1
+fi
+
+# Rename following variable names
+rm $OPENSHIFT_ADDON_EXAMPLE_DIR/env/OPENSHIFT_ADDON_EXAMPLE_USERNAME
+rm $OPENSHIFT_ADDON_EXAMPLE_DIR/env/OPENSHIFT_ADDON_EXAMPLE_PASSWORD
+rm $OPENSHIFT_ADDON_EXAMPLE_DIR/env/OPENSHIFT_ADDON_EXAMPLE_URL
+
+client_result "Addon sucessfully uninstalled"
+client_result "Changes will take effect after application restart"
+
+exit 0
